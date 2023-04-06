@@ -3,21 +3,9 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import './App.css';
 
-
-
 const g = 9.81;
 const circleCenter = { x: 0, y: 0, z: 0 }
 const circleRadius = 2
-
-//position: [x, y, z]
-
-//line equation for 2 points (y - y1)(x1 - x2) - (y1 - y2)(x - x1) = 0
-
-//line equation: 0x + y + 2 = 0
-
-// function line([x, y, z]) {
-//   return {A:}
-// }
 
 function distanceBetweenPoints(point1, point2) {
   return Math.sqrt(Math.pow(point1.x - point2.x , 2) + Math.pow(point1.y - point2.y , 2))
@@ -30,8 +18,6 @@ function distancePointToCircle(point, pointOffset) {
     y: Math.abs(point.y - circleCenter.y, 2),
   }
 }
-
-//TODO: co jesli predkosc w x jest 0?...
 
 function calculateBounceAngle(point, velocity) {
   if (velocity.x === 0) return Math.PI
@@ -91,7 +77,6 @@ function BouncingBallArray(props) {
       circle_refs.current[i].position.x += velocity[i].speed_x * delta / 1000;
       circle_refs.current[i].position.y += velocity[i].speed_y * delta / 1000;
       if (!velocity[i].stop_y) velocity[i].speed_y -= (1/2) * Math.pow(g, 2)
-      //console.log(`speedX = ${velocity[i].speed_x}`)
       let distance = distancePointToCircle(circle_refs.current[i].position, props.radius);
       if (distance.total <= 0){
         circle_refs.current[i].position.x += deltaX(distance.total, circle_refs.current[i].position.x);
